@@ -40,9 +40,10 @@ cli development
 
 */
 
-
+#include "CLI.h"
 #include<iostream>
-// #include "CLI.h"
+
+#include <string>
 
 
 int main(int argc, char* argv[])
@@ -69,12 +70,12 @@ int main(int argc, char* argv[])
         else
         break;
 
-        i++;
+        ++i;
     }
 
 
     // handle REPL and one-shot command modes
-    CLI::cli(host, port);    // clint class making cli object
+    CLI cli(host, port);    // clint class making cli object
     cli.run();
 
     return 0;

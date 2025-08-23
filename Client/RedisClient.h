@@ -9,9 +9,9 @@
 #include <cstring>
 
 class RedisClient{
+public:
     RedisClient(const std::string &host, int port);
     ~RedisClient();
-
     bool connectToServer();
     void disconnect();
 
