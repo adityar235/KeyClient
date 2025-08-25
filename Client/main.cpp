@@ -45,6 +45,10 @@ cli development
 
 #include <string>
 
+//to stop redis server service  type this in terminal ->  sudo systemctl stop redis
+// to start redis server service type this in terminal ->   sudo systemctl start redis-server
+
+
 // argc = number of command-line tokens (at least 1).
 //./myapp -h 127.0.0.1 -p 6380
 // argc = 5,argv[0] = "./myapp" (the program name / path),argv[1] = "-h",argv[2] = "127.0.0.1",argv[3] = "-p",argv[4] = "6380"

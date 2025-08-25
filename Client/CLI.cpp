@@ -43,10 +43,21 @@ void CLI::run() {                              // check if with taht host, port 
         std::vector<std::string> args = CommandHandler::splitArgs(line);
         if(args.empty()) continue;
 
-        for (const auto &arg : args) {
-            std::cout << arg << "\n";
+        // for (const auto &arg : args) {
+        //     std::cout << arg << "\n";
+        // }
+
+        std::string command = CommandHandler::buildRESPcommand(args);
+         if (!redisClient.sendCommand(command)) {
+            std::cerr << "(Error) Failed to send command.\n";
+            break;
         }
+        // response Parse and print response will be the next step
+        std::string response = ResponseParser::parseResponse(redisClient.getSocketFD());
+        std::cout << response << "\n";
     }
+
+    redisClient.disconnect();
 
 
 }

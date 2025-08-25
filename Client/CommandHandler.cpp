@@ -37,7 +37,7 @@ std::vector<std::string> CommandHandler::splitArgs(const std::string &input) {
     +arg
     */
 
-std::string CommandHandler::buildRESPcommand(const std::vector<std::string> &args) {
+std::string CommandHandler::buildRESPcommand(const std::vector<std::string> &args) {  //sending that splited commands with protocol
     std::ostringstream oss;
     oss << "*" << args.size() << "\r\n"; // num of args
 

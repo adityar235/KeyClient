@@ -108,9 +108,9 @@ int RedisClient::getSocketFD() const {
     return sockfd;
 }
 
-bool RedisClient::sendCommand(const std::string &command)
+bool RedisClient::sendCommand(const std::string &command)   //sending command to client khud ka hai
 {
-    if (sockfd == -1) return false;
+    if (sockfd == -1) return false;  // if server is not listening khud ka hai 
     ssize_t sent = send(sockfd, command.c_str(), command.size(), 0);
     return (sent == (ssize_t)command.size());
 }
