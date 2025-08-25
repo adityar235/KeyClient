@@ -13,14 +13,19 @@ Establishing a TCP Connection to Redis (RedisClient)
 
 
 
-#include "RedisClient.h"
+#include "RedisClient.h"        //include the class definition from the header 
 
 RedisClient::RedisClient(const std::string &host, int port) 
-    : host(host), port(port), sockfd(-1) {}
+    : host(host), port(port), sockfd(-1) {}        //It initializes the data members of the class before the upper constructor body executes.
+
+// RedisClient::RedisClient(const std::string &h, int p) {
+//     host = h;
+//     port = p;
+//     sockfd = -1;
+// }
 
 
-
-RedisClient::~RedisClient(){
+RedisClient::~RedisClient(){   //automatically disconnet when objet is destroyed
     disconnect();
 }
 
