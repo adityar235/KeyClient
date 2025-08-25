@@ -45,6 +45,11 @@ cli development
 
 #include <string>
 
+// argc = number of command-line tokens (at least 1).
+//./myapp -h 127.0.0.1 -p 6380
+// argc = 5,argv[0] = "./myapp" (the program name / path),argv[1] = "-h",argv[2] = "127.0.0.1",argv[3] = "-p",argv[4] = "6380"
+
+// argv = array of C-strings; argv[0] is the program name, argv[1...] are the args.
 
 int main(int argc, char* argv[])
 {
@@ -68,15 +73,22 @@ int main(int argc, char* argv[])
             port = std::stoi(argv[++i]);
         }
         else
-        break;
+        break;      //if token is neither "-h" nor "-p" (or missing value)
 
         ++i;
     }
 
 
     // handle REPL and one-shot command modes
+    // Create the CLI object with the chosen host/port and start the REPL loop.
     CLI cli(host, port);    // clint class making cli object
     cli.run();
+
+    //Here REPL stands for:
+   //Read → Take input from the user (for example, a Redis command).
+   //Evaluate → Process/execute the command (send it to Redis through your RedisClient).
+   //Print → Show the result back to the user.
+   //Loop → Repeat the cycle until the user quits.
 
     return 0;
 }
