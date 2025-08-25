@@ -15,6 +15,7 @@ public:
     
     bool connectToServer();          //return true for successful and false for fails connection
     void disconnect();               //method to disconnect from the server
+    int getSocketFD() const;
 
 private:
     std::string host;      //host or IP to connect with

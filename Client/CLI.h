@@ -5,12 +5,12 @@
 #include<string>
 //
 #include "RedisClient.h"
-
+#include "CommandHandler.h"
 
 class CLI{
     public:
         CLI(const std::string &host, int port);   //constructor take host and port to initialize the redisclient member
-        
+
         void run();                               //A method that will likely handle the user input loop for your CLI program
         // will check if it ConnetToServer or not
     private:

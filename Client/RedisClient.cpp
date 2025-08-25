@@ -101,3 +101,9 @@ void RedisClient::disconnect()
     sockfd = -1;              //reset socket file descriptor
 }
 
+
+
+
+int RedisClient::getSocketFD() const {
+    return sockfd;
+}
