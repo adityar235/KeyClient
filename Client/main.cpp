@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
     std::string host = "127.0.0.1";
     int port = 6379;
     int i = 1;
+    std::vector<std::string> commandArgs;
 
     
     // parse command-line arguments for -h and -p
@@ -77,7 +78,14 @@ int main(int argc, char* argv[])
             port = std::stoi(argv[++i]);
         }
         else
-        break;      //if token is neither "-h" nor "-p" (or missing value)
+        {
+         while(i < argc)
+         {
+            commandArgs.push_back(argv[i]);
+            i++;
+         }
+         break;      //if token is neither "-h" nor "-p" (or missing value)
+        }
 
         ++i;
     }
@@ -85,8 +93,9 @@ int main(int argc, char* argv[])
 
     // handle REPL and one-shot command modes
     // Create the CLI object with the chosen host/port and start the REPL loop.
-    CLI cli(host, port);    // clint class making cli object
-    cli.run();
+   CLI cli(host, port);    // clint class making cli object
+   cli.run(commandArgs);  
+    
 
     //Here REPL stands for:
    //Read → Take input from the user (for example, a Redis command).

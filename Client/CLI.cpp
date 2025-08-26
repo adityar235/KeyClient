@@ -13,9 +13,14 @@ static std::string trim(const std::string &s) {
 CLI::CLI(const std::string &host, int port) 
     : redisClient(host, port) {}             //ye host, port and socket=-1 set kar dega
 
-void CLI::run() {                              // check if with taht host, port and socket is helps in connec to server or not
+void CLI::run(const std::vector<std::string>& commandArgs) {                              // check if with taht host, port and socket is helps in connec to server or not
     if (!redisClient.connectToServer()) {
         return;
+    }
+    
+    if(!commandArgs.empty())
+    {
+        executeCommand(commandArgs);
     }
 
     std::cout << "Connected to Redis at " << redisClient.getSocketFD() << "\n";
@@ -30,7 +35,7 @@ void CLI::run() {                              // check if with taht host, port 
         if (!std::getline(std::cin, line)) break;
         line = trim(line);
         if(line.empty()) continue;
-        if (line == "quit") {
+        if (line == "quit" || line == "exit") {
             std::cout << "Goodbye.\n";
             break;
         }
@@ -60,4 +65,25 @@ void CLI::run() {                              // check if with taht host, port 
     redisClient.disconnect();
 
 
+}
+
+void CLI::executeCommand(const std::vector<std::string>& args)
+{
+    if(args.empty())
+    return;
+
+    std::string command = CommandHandler::buildRESPcommand(args);
+    // for(const auto &arg : args)
+    // {
+    //     std::cout << arg <<"\n";
+    // }
+    if(!redisClient.sendCommand(command))
+    {
+        std::cerr<<"(Error) failed to send command.\n";
+        return;
+    }
+
+    // Parse and print response
+    std::string response = ResponseParser::parseResponse(redisClient.getSocketFD());
+    std::cout << response << "\n";
 }
