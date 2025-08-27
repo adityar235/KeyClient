@@ -6,7 +6,7 @@
 
 class CommandHandler {      //splits command into tokens khud ka 
 public:
-    //splitArgs Split comman into tokens
+    //splitArgs Split comman into tokens which we get from user as input
     static std::vector<std::string> splitArgs(const std::string &input);
     
     // Build a RESP command from the vector arguments

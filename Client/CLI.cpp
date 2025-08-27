@@ -3,10 +3,10 @@
 
 // Simple helper to trim whitespace
 static std::string trim(const std::string &s) {
-    size_t start = s.find_first_not_of(" \t\n\r\f\v");
+    size_t start = s.find_first_not_of(" \t\n\r\f\v");    //scan left to right
     if (start == std::string::npos) return "";
-    size_t end = s.find_last_not_of(" \t\n\r\f\v");
-    return s.substr(start, end - start + 1);
+    size_t end = s.find_last_not_of(" \t\n\r\f\v");   //scan right to left last char not whitespace
+    return s.substr(start, end - start + 1);      // (pos, len)
 }
 
 
@@ -15,7 +15,7 @@ CLI::CLI(const std::string &host, int port)
 
 void CLI::run(const std::vector<std::string>& commandArgs) {                              // check if with taht host, port and socket is helps in connec to server or not
     if (!redisClient.connectToServer()) {
-        return;
+        return;                            //if the server connection failed then it will return 
     }
     
     if(!commandArgs.empty())
@@ -30,7 +30,7 @@ void CLI::run(const std::vector<std::string>& commandArgs) {                    
 
      while (true) {
         std::cout << host  << ":" << port << "> ";
-        std::cout.flush();
+        std::cout.flush();    //forces the buffer to be written immediately to the terminal, even if it’s not full. or When the program not ended
         std::string line;
         if (!std::getline(std::cin, line)) break;
         line = trim(line);
@@ -72,7 +72,7 @@ void CLI::executeCommand(const std::vector<std::string>& args)
     if(args.empty())
     return;
 
-    std::string command = CommandHandler::buildRESPcommand(args);
+    std::string command = CommandHandler::buildRESPcommand(args); 
     // for(const auto &arg : args)
     // {
     //     std::cout << arg <<"\n";
