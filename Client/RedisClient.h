@@ -1,4 +1,4 @@
-#ifndef REDIS_CLIENT_H      //head file to prevent file from being included and compiled multiple times
+#ifndef REDIS_CLIENT_H      
 #define REDIS_CLIENT_H
 
 #include <string>
@@ -10,18 +10,18 @@
 
 class RedisClient{
 public:
-    RedisClient(const std::string &host, int port);   // constructor is called when objected is created
-    ~RedisClient();                                   // distructor is called when object is getting out of scope
+    RedisClient(const std::string &host, int port); 
+    ~RedisClient();                                   
     
-    bool connectToServer();          //return true for successful and false for fails connection
-    void disconnect();               //method to disconnect from the server
+    bool connectToServer();          
+    void disconnect();               
     int getSocketFD() const;
     bool sendCommand(const std::string &command);
     
 private:
-    std::string host;      //host or IP to connect with
-    int port;              //port no. to connect with
-    int sockfd;            //
+    std::string host;      
+    int port;              
+    int sockfd;            
 
 };
 

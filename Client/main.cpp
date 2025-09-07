@@ -45,19 +45,11 @@ cli development
 
 #include <string>
 
-//to stop redis server service  type this in terminal ->  sudo systemctl stop redis
-// to start redis server service type this in terminal ->   sudo systemctl start redis-server
 
-
-// argc = number of command-line tokens (at least 1).
-//./myapp -h 127.0.0.1 -p 6380
-// argc = 5,argv[0] = "./myapp" (the program name / path),argv[1] = "-h",argv[2] = "127.0.0.1",argv[3] = "-p",argv[4] = "6380"
-
-// argv = array of C-strings; argv[0] is the program name, argv[1...] are the args.
 
 int main(int argc, char* argv[])
 {
-    // this is default part if user will not give any host and port
+   
     std::string host = "127.0.0.1";
     int port = 6379;
     int i = 1;
@@ -84,24 +76,19 @@ int main(int argc, char* argv[])
             commandArgs.push_back(argv[i]);
             i++;
          }
-         break;      //if token is neither "-h" nor "-p" (or missing value)
+         break;      
         }
 
         ++i;
     }
 
 
-    // handle REPL and one-shot command modes
-    // Create the CLI object with the chosen host/port and start the REPL loop.
-   CLI cli(host, port);    // clint class making cli object
+   
+   CLI cli(host, port);    
    cli.run(commandArgs);  
     
 
-    //Here REPL stands for:
-   //Read → Take input from the user (for example, a Redis command).
-   //Evaluate → Process/execute the command (send it to Redis through your RedisClient).
-   //Print → Show the result back to the user.
-   //Loop → Repeat the cycle until the user quits.
+    
 
     return 0;
 }

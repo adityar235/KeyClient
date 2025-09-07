@@ -8,8 +8,8 @@ BUILD_DIR = build
 BIN_DIR = bin
 
 # Find all .cpp files in the Client directory
-SRCS := $(wildcard $(SRC_DIR)/*.cpp)
-OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
+SRCS := $(wildcard $(SRC_DIR)/*.cpp)                                   // wildcard finds all .cpp files in Client/.
+OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))        // patsubst replaces .cpp with .o → creates a list of object files.
 
 # Output binary
 TARGET = $(BIN_DIR)/my_redis_cli
